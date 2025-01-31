@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeCraft Academy - Learning Hub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6C63FF;
+            --secondary: #FF6584;
+            --accent: #00C9A7;
+            --background: #F9F9FF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        body {
+            background: var(--background);
+            color: #2D2D2D;
+        }
+
+        /* Learning Header */
+        .learning-header {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .learning-header h1 {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .main-nav{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin:0 auto;
+        }
+
+        .logo{
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            gap: 2rem;
+        }
+
+        .nav-links{
+            list-style: none;
+            display: flex;
+            gap:2rem;
+        }
+
+        .logo.nav-links{
+           gap: 2rem; 
+        }
+
+        .nav-links a{
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover{
+            color: var(--secondaryv);
+        }
+
+        .nav-links.active{
+            color: var(--secondary);
+            border-bottom: 2px solid var(--secondary);
+        }
+
+
+
+
+        .lesson-filters {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            position:relative;
+        }
+
+        .dropdown-button {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            cursor:pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-content{  
+            display: none;
+            position:absolute;
+            background-color: #F9F9FF;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            padding: 12px 16px;
+            flex-direction:upw;
+            top:150%;
+            width: 16rem;
+            height: 9.0rem;
+
+            
+        }
+
+        .dropdown-content a {
+            display:flex;
+            word-spacing:5px;
+            text-indent: 5px;
+            padding-top: 10px;
+        }
+
+        .show{
+            display: block;
+        }
+
+        /*.dropdown-content a {
+            padding: 12px;
+            display: block;
+
+        }*/
+
+        
+
+       /* .dropdown-button {
+          background: white;
+            color: var(--primary);
+        }*/
+
+
+         /*.dropdown-button:click
+         + .dropdown-content {
+            display: flex;
+         }*/
+
+
+         /*.dropdown-content{
+            display: flex;*/
+         }
+
+         .dropdown-button:hover{
+            background-color: aquamarine;
+         }
+        /* Lesson Grid */
+        .lesson-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 10rem;
+        }
+
+        .lesson-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .lesson-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .lesson-badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: var(--secondary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+        }
+
+        .lesson-thumbnail {
+            width: 100%;
+            height: 200px;
+            border-radius: 15px;
+            object-fit: cover;
+            margin-bottom: 1rem;
+        }
+
+        .video-container {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .video-container video {
+            width: 100%;
+            border-radius: 15px;
+        }
+
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        /* Code Snippet Styling */
+        .code-snippet {
+            background: #2D2D2D;
+            color: #00C9A7;
+            padding: 1rem;
+            border-radius: 10px;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 1rem 0;
+        }
+
+        /* Interactive Elements */
+        .quiz-box {
+            background: #FFF3F5;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .challenge-button {
+            background: var(--accent);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .challenge-button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Progress Tracking */
+        .progress-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            margin: 2rem auto;
+            max-width: 1200px;
+        }
+
+        .progress-bar {
+            height: 15px;
+            background: #eee;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            width: 65%;
+            transition: width 0.5s ease;
+        }
+
+        /* Sidebar */
+        .learning-sidebar {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: white;
+            padding: 1.5rem;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .achievement-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .badge-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+
+        } /* Fun Terminal Effect */
+        .terminal {
+            background: #2D2D2D;
+            color: #00C9A7;
+            border-radius: 15px;
+            padding: 2rem;
+            font-family: monospace;
+            margin: 2rem 0;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        .terminal::before {
+            content: "> ";
+            color: var(--secondary);
+        }
+
+    </style>
+</head>
+<body>
+    <header class="learning-header">
+
+        <nav class="main-nav">
+            <div class="logo">CodeCraft Academy</div>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="active">Home </a></li>
+                    <li><a href="about.html" class="active"> About Us</a></li>
+                    <li><a href="learn.html" class="active">Learn</a></li>
+                    <li><a href="contact.html" class="active">Contact</a></li>
+                </ul>
+        </nav>
+        
+        
+        <h1>Start Your Coding Journey! 🚀</h1>
+        
+        <div class="lesson-filters">
+            <button class="dropdown-button">HTML Basics</button>
+            <div class="dropdown-content">
+              <ol>
+                <li><a href="#">what is html?</a></li>
+                <li><a href="#">Intro to html tags</a></li>
+                <li><a href="#">Build with html</a></li>
+             </ol>
+            </div>
+
+            <button class="dropdown-button">CSS Magic</button>
+            <div class="dropdown-content">
+                <ol>
+                <li><a href="#">what is css</a></li>
+                <li><a href="#">Intro to html tags</a></li>
+                <li><a href="#">Build with html</a></li>
+                </ol>
+            </div>
+
+            <button class="dropdown-button">JS Fun</button>
+            <div class="dropdown-content">
+                <ol>
+                    <li><a href="#">what is html?</a></li>
+                    <li><a href="#">Intro to html tags</a></li>
+                    <li><a href="#">Build with html</a></li>
+                </ol>
+            </div>
+
+            <button class="dropdown-button">All Lessons</button>
+             <div class="dropdown-content">
+                <ol>
+                <li><a href="#">what is html?</a></li>
+                <li><a href="#">Intro to html tags</a></li>
+                <li><a href="#">Build with html</a></li>
+                </ol>
+            </div>
+        </div>
+    </header>
+
+    <div class="lesson-grid">
+        <!-- Lesson Card 1 -->
+        <article class="lesson-card">
+            <div class="lesson-badge">New! 🌟</div>
+            <img src="html-thumbnail.jpg" alt="HTML Basics" class="lesson-thumbnail">
+            <h2>HTML Basics: Building Your First Web Page</h2>
+            <div class="code-snippet">
+                &lt;!DOCTYPE html&gt;<br>
+                &lt;html&gt;<br>
+                &lt;body&gt;<br>
+                &lt;h1&gt;Hello World!&lt;/h1&gt;<br>
+                &lt;/body&gt;<br>
+                &lt;/html&gt;
+            </div>
+            <div class="quiz-box">
+                <h3>Quick Quiz! ❓</h3>
+                <p>What does HTML stand for?</p>
+                <button class="challenge-button">Answer Now</button>
+            </div>
+        </article>
+
+        <!-- Lesson Card 2 -->
+        <article class="lesson-card">
+            <div class="video-container">
+                <video poster="css-video-thumb.jpg">
+                    <source src="css-intro.mp4" type="video/mp4">
+                </video>
+                <div class="play-button"><i class="fas fa-play"></i></div>
+            </div>
+            <h2>CSS Magic: Making Things Pretty</h2>
+            <p>Learn how to style your web pages with colors and animations!</p>
+            <div class="code-snippet">
+                .cool-button {<br>
+                &nbsp;&nbsp;background: #6C63FF;<br>
+                &nbsp;&nbsp;padding: 10px 20px;<br>
+                &nbsp;&nbsp;border-radius: 10px;<br>
+                }
+            </div>
+        </article>
+    </div>
+
+    <div class="progress-container">
+        <h3>Your Progress 📈</h3>
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+        <p>65% Complete - Keep it up! 🎉</p>
+    </div>
+
+    <aside class="learning-sidebar">
+        <h4>Achievements 🏆</h4>
+        <div class="achievement-badge">
+            <div class="badge-icon"><i class="fas fa-code"></i></div>
+            <span>First Web Page Built!</span>
+        </div>
+        <div class="achievement-badge">
+            <div class="badge-icon"><i class="fas fa-palette"></i></div>
+            <span>CSS Master</span>
+        </div>
+    </aside>
+    
+    <div class="terminal">
+        // Welcome to CodeCraft Academy!<br>
+        let creativity = ∞;<br>
+        while(true) { keepCoding(); }
+
+        @2025 codecraft Academy. All rights reserved. 
+        
+    </div>
+
+
+
+    <script>
+        // Video play functionality
+        document.querySelectorAll('.play-button').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const video = e.target.closest('.video-container').querySelector('video');
+                video.play();
+                e.target.style.display = 'none';
+            });
+        });
+
+        // Lesson filtering
+        document.querySelectorAll('.dropdown-button').forEach(button => {
+            button.addEventListener('click', () => {
+                // Add filtering logic here
+                
+            });
+        });
+
+        //Dropdown Animation
+
+        const dropdownButton = document.querySelector('.dropdown-button');
+        const dropdownContent = document.querySelector('.dropdown-content');
+        dropdownButton.addEventListener('click',() => {
+            dropdownContent.classList.toggle('show');
+        });
+
+        // Progress animation
+        const progressFill = document.querySelector('.progress-fill');
+        setTimeout(() => {
+            progressFill.style.width = '65%';
+        }, 500);
+        
+        
+        // Interactive terminal effect
+        const terminal = document.querySelector('.terminal');
+        let terminalText = terminal.innerHTML;
+        terminal.innerHTML = '';
+
+        let index = 0;
+        const typeTerminal = () => {
+            if(index < terminalText.length) {
+                terminal.innerHTML += terminalText.charAt(index);
+                index++;
+                setTimeout(typeTerminal, 50);
+            }
+        }
+
+        typeTerminal();
+
+
+
+
+    </script>
+</body>
+</html>

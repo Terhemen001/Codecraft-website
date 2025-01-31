@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeCraft Academy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6C63FF;
+            --secondary: #FF6584;
+            --accent: #00C9A7;
+            --background: #F9F9FF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        body {
+            background: var(--background);
+            color: #2D2D2D;
+        }
+
+        /* Animated Header */
+        .hero {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            padding: 4rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .hero-text {
+            flex: 1;
+            color: white;
+            z-index: 2;
+        }
+
+        .hero-image {
+            flex: 1;
+            position: relative;
+        }
+
+        .coding-mascot {
+            width: 80px;
+            max-width: 400px;
+            animation: float 3s ease-in-out infinite;
+            height: 80px;
+            border-radius: 50%;
+        }
+
+        .main-nav{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin:0 auto;
+        }
+
+        .logo{
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            gap: 2rem;
+        }
+
+        .nav-links{
+            list-style: none;
+            display: flex;
+            gap:2rem;
+        }
+
+        .logo.nav-links{
+           gap: 2rem; 
+        }
+
+        .nav-links a{
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover{
+            color: var(--secondaryv);
+        }
+
+        .nav-links.active{
+            color: var(--secondary);
+            border-bottom: 2px solid var(--secondary);
+        }
+
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Courses Grid */
+        .courses {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .course-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .course-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .course-badge {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            background: var(--secondary);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+        }
+
+        .course-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        /* Interactive Elements */
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--secondary);
+            color: white;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Progress Elements */
+        .progress-bar {
+            height: 8px;
+            background: #eee;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--accent);
+            width: 75%;
+            transition: width 0.5s ease;
+        }
+
+        /* Student Projects Showcase */
+        .projects {
+            background: white;
+            padding: 4rem 2rem;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem; 
+            box-shadow: 0 5px 15px (rgba(0,0,0,0.1)) ;
+        }
+
+        .project-card {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+           
+        }
+
+        .project-card img {
+            width: 30px;
+            height: 30px;
+            object-fit: cover;
+            border-radius: 50%;
+            padding-to
+        }
+
+        /* Fun Terminal Effect */
+        .terminal {
+            background: #2D2D2D;
+            color: #00C9A7;
+            border-radius: 15px;
+            padding: 2rem;
+            font-family: monospace;
+            margin: 2rem 0;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        .terminal::before {
+            content: "> ";
+            color: var(--secondary);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .coding-mascot {
+                max-width: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="hero">
+        
+
+        <nav class="main-nav">
+            <div class="logo">CodeCraft Academy</div>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="active">Home </a></li>
+                    <li><a href="about.html" class="active"> About Us</a></li>
+                    <li><a href="learn.html" class="active">Learn</a></li>
+                    <li><a href="contact.html" class="active">Contact</a></li>
+                </ul>
+        </nav>
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 style="font-family: 'Comic Neue', cursive; font-size: 3rem;">
+                    Build Cool Stuff with Code! 🚀
+                </h1>
+                <p class="subtitle" style="font-size: 1.2rem; margin: 1.5rem 0;">
+                    Learn web development through fun projects and creative challenges!
+                </p>
+                <a href="learn.html" class="cta-button">Start Learning Free</a>
+            </div>
+            <div class="hero-image">
+                <img src="public/images/codingmascot.png" 
+                     alt="Coding Robot Mascot" class="coding-mascot">
+            </div>
+            
+        </div>
+    </header>
+
+    <section class="courses">
+        <h2 style="text-align: center; color: var(--primary); margin-bottom: 1rem;">
+            Our Awesome Courses
+        </h2>
+        <div class="course-grid">
+            <div class="course-card">
+                <div class="course-badge">Most Popular!</div>
+                <i class="fas fa-code course-icon"></i>
+                <h3>Web Wizardry 101</h3>
+                <p>HTML, CSS & JavaScript basics through game development</p>
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <span>75% Complete</span>
+            </div>
+            
+            <div class="course-card">
+                <i class="fab fa-js course-icon"></i>
+                <h3>JavaScript Jungle</h3>
+                <p>Master programming fundamentals with interactive challenges</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 40%;"></div>
+                </div>
+                <span>40% Complete</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="projects">
+        <h2 style="text-align: center; color: var(--primary); margin-bottom: 2rem;">
+            Student Creations
+        </h2>
+        <div class="project-grid">
+            <div class="project-card">
+                <img src="public/images/hand.png" alt="Student Project">
+                <div style="padding: 1rem;">
+                    <h4>Job listing site</h4>
+                    <p>By: Sarah, Age 12</p>
+                </div>
+            </div>
+            <div class="project-card">
+                <img src="public/images/portfolio.png" alt="Student Project">
+                <div style="padding: 1rem;">
+                    <h4>Portfolio Website</h4>
+                    <p>By: Alex, Age 14</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="terminal">
+        // Welcome to CodeCraft Academy!<br>
+        let creativity = ∞;<br>
+        while(true) { keepCoding(); }
+
+        @2025 codecraft Academy. All rights reserved. 
+        
+    </div>
+
+    <script>
+        // Animate progress bars on scroll
+        const progressBars = document.querySelectorAll('.progress-fill');
+        
+        const animateProgress = () => {
+            progressBars.forEach(bar => {
+                const targetWidth = bar.style.width;
+                bar.style.width = '0';
+                setTimeout(() => {
+                    bar.style.width = targetWidth;
+                }, 500);
+            });
+        }
+
+        window.addEventListener('load', animateProgress);
+
+        // Interactive terminal effect
+        const terminal = document.querySelector('.terminal');
+        let terminalText = terminal.innerHTML;
+        terminal.innerHTML = '';
+
+        let index = 0;
+        const typeTerminal = () => {
+            if(index < terminalText.length) {
+                terminal.innerHTML += terminalText.charAt(index);
+                index++;
+                setTimeout(typeTerminal, 50);
+            }
+        }
+
+        typeTerminal();
+    </script>
+</body>
+</html>

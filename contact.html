@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact CodeCraft Academy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6C63FF;
+            --secondary: #FF6584;
+            --accent: #00C9A7;
+            --background: #F9F9FF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        body {
+            background: var(--background);
+            color: #2D2D2D;
+        }
+
+        /* Animated Header */
+        .contact-hero {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            padding: 6rem 2rem 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-hero h1 {
+            font-size: 3.5rem;
+            color: white;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .floating-emoji {
+            font-size: 4rem;
+            animation: float 3s ease-in-out infinite;
+            display: inline-block;
+            margin: 1rem;
+        }
+
+        .main-nav{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin:0 auto;
+        }
+
+        .logo{
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            gap: 2rem;
+        }
+
+        .nav-links{
+            list-style: none;
+            display: flex;
+            gap:2rem;
+        }
+
+        .logo.nav-links{
+           gap: 2rem; 
+        }
+
+        .nav-links a{
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover{
+            color: var(--secondaryv);
+        }
+
+        .nav-links.active{
+            color: var(--secondary);
+            border-bottom: 2px solid var(--secondary);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Contact Grid */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .contact-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            text-align: center;
+            position: relative;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .contact-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .submit-button {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .submit-button:hover {
+            transform: scale(1.05) rotate(3deg);
+        }
+
+        /* Social Links */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            background: var(--secondary);
+            transform: translateY(-5px);
+        }
+
+        /* Map */
+        .map-container {
+            margin: 4rem auto;
+            max-width: 1200px;
+            padding: 0 2rem;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        
+        .terminal {
+            background: #2D2D2D;
+            color: #00C9A7;
+            border-radius: 15px;
+            padding: 2rem;
+            font-family: monospace;
+            margin: 2rem 0;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        .terminal::before {
+            content: "> ";
+            color: var(--secondary);
+        }
+
+
+
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .contact-hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="contact-hero">
+        
+    <nav class="main-nav">
+        <div class="logo">CodeCraft Academy</div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="about.html" class="active">About Us</a></li>
+                <li><a href="learn.html" class="active">Learn</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+            </ul>
+    </nav>
+
+        <h1>Let's Connect! 🤝</h1>
+        <div class="floating-emoji">📧</div>
+        <div class="floating-emoji">📱</div>
+        <div class="floating-emoji">💬</div>
+        <p style="color: white; font-size: 1.2rem; max-width: 800px; margin: 1rem auto;">
+            Got questions? Our coding wizards are here to help!
+        </p>
+    </section>
+
+    <div class="contact-grid">
+        <div class="contact-card">
+            <i class="fas fa-envelope contact-icon"></i>
+            <h3>Email Us</h3>
+            <p>hello@codecraft.academy</p>
+            <p>Available 24/7</p>
+        </div>
+        <div class="contact-card">
+             <h3>Call Us</h3>
+            <p>+234 ( ) CODE-FUN</p>
+            <p>Mon-Fri: 9AM - 5PM WAT</p>
+        </div>
+        <div class="contact-card">
+            <i class="fas fa-comments contact-icon"></i>
+            <h3>Live Chat</h3>
+            <p>Click the chat icon below</p>
+            <p>Instant support</p>
+        </div>
+    </div>
+
+    <section class="contact-form">
+        <h2 style="text-align: center; color: var(--primary); margin-bottom: 2rem;">
+            Send Us a Message ✨
+        </h2>
+        <form id="contactForm">
+            <div class="form-group">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Your Email</label>
+                <input type="email" id="email" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Your Message</label>
+                <textarea id="message" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="submit-button">
+                <i class="fas fa-paper-plane"></i>
+                Send Message
+            </button>
+        </form>
+    </section>
+
+    <div class="map-container">
+        <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.9663095343004!2d-73.98542828459382!3d40.74844047932881!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259a9b3117469%3A0xd134e199a405a163!2sEmpire%20State%20Building!5e0!3m2!1sen!2sus!4v1625070000000!5m2!1sen!2sus" 
+            width="100%" 
+            height="400" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy">
+        </iframe>
+    </div>
+
+    <div class="social-links">
+        
+        <a href="#" class="social-link">
+            <i class="fab fa-discord"></i>
+        </a>
+
+        <a href="#" class="social-link">
+            <i class="fab fa-instagram"></i>
+        </a>
+        <a href="#" class="social-link">
+            <i class="fab fa-youtube"></i>
+        </a>
+        <a href="#" class="social-link">
+            <i class="fab fa-github"></i>
+        </a>
+    </div>
+    
+    <div class="terminal">
+        // Welcome to CodeCraft Academy!<br>
+        let creativity = ∞;<br>
+        while(true) { keepCoding(); }
+
+        @2025 codecraft Academy. All rights reserved. 
+        
+    </div>
+
+
+
+
+    <script>
+        // Form submission animation
+        const form = document.getElementById('contactForm');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Add temporary animation
+            const submitButton = document.querySelector('.submit-button');
+            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            
+            setTimeout(() => {
+                submitButton.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
+                submitButton.style.backgroundColor = var(--accent);
+                form.reset();
+                
+                // Reset after 2 seconds
+                setTimeout(() => {
+                    submitButton.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+                    submitButton.style.backgroundColor = var(--secondary);
+                }, 2000);
+            }, 1500);
+        });
+
+        // Add hover effect to contact cards
+        const contactCards = document.querySelectorAll('.contact-card');
+        contactCards.forEach(card => {
+            card.addEventListener('mouseover', () => {
+                card.style.transform = 'translateY(-10px)';
+            });
+            card.addEventListener('mouseout', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+
+            // Interactive terminal effect
+        const terminal = document.querySelector('.terminal');
+        let terminalText = terminal.innerHTML;
+        terminal.innerHTML = '';
+
+        let index = 0;
+        const typeTerminal = () => {
+            if(index < terminalText.length) {
+                terminal.innerHTML += terminalText.charAt(index);
+                index++;
+                setTimeout(typeTerminal, 50);
+            }
+        }
+
+        typeTerminal();
+    </script>
+</body>
+</html>

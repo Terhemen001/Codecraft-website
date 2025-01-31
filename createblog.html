@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create a New Blog Post</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6C63FF;
+            --secondary: #FF6584;
+            --accent: #00C9A7;
+            --background: #F9F9FF;
+            --text: #2D2D2D;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        body {
+            background: var(--background);
+            color: var(--text);
+        }
+
+        .upload-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: var(--text);
+        }
+
+        .form-group input[type="text"],
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input[type="text"]:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 200px;
+        }
+
+        .file-upload {
+            border: 2px dashed #eee;
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .file-upload:hover {
+            background: rgba(108, 99, 255, 0.05);
+        }
+
+        .file-upload input[type="file"] {
+            display: none;
+        }
+
+        .file-upload label {
+            color: var(--primary);
+            cursor: pointer;
+        }
+
+        .file-upload label i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .submit-button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            width: 100%;
+        }
+
+        .submit-button:hover {
+            background: var(--accent);
+        }
+
+        .preview-section {
+            margin-top: 2rem;
+            border-top: 2px solid #eee;
+            padding-top: 2rem;
+        }
+
+        .preview-section h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .preview-content {
+            background: #f9f9f9;
+            padding: 1rem;
+            border-radius: 10px;
+            border: 2px solid #eee;
+        }
+    </style>
+</head>
+<body>
+    <div class="upload-container">
+        <h1>Create a New Blog Post</h1>
+
+        <!-- Blog Post Form -->
+        <form id="blogForm" enctype="multipart/form-data">
+            <!-- Title Input -->
+            <div class="form-group">
+                <label for="postTitle">Post Title</label>
+                <input type="text" id="postTitle" placeholder="Enter your post title" required>
+            </div>
+
+            <!-- Content Input -->
+            <div class="form-group">
+                <label for="postContent">Post Content</label>
+                <textarea id="postContent" placeholder="Write your blog post here..." required></textarea>
+            </div>
+
+            <!-- File Upload -->
+            <div class="form-group">
+                <label>Upload Media</label>
+                <div class="file-upload">
+                    <input type="file" id="fileInput" accept="image/*, video/*">
+                    <label for="fileInput">
+                        <i class="fas fa-cloud-upload-alt"></i><br>
+                        Click to upload images or videos
+                    </label>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="submit-button">Publish Post</button>
+        </form>
+
+        <!-- Preview Section -->
+        <div class="preview-section">
+            <h2>Post Preview</h2>
+            <div class="preview-content" id="previewContent">
+                <!-- Preview content will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript for Preview Functionality
+        const postTitle = document.getElementById('postTitle');
+        const postContent = document.getElementById('postContent');
+        const previewContent = document.getElementById('previewContent');
+        const fileInput = document.getElementById('fileInput');
+
+        // Update preview on input
+        postTitle.addEventListener('input', updatePreview);
+        postContent.addEventListener('input', updatePreview);
+        fileInput.addEventListener('change', updatePreview);
+
+        function updatePreview() {
+            let mediaPreview = '';
+            if (fileInput.files && fileInput.files[0]) {
+                const file = fileInput.files[0];
+                if (file.type.startsWith('image/')) {
+                    mediaPreview = `<img src="${URL.createObjectURL(file)}" alt="Uploaded Image" style="max-width: 100%; border-radius: 10px; margin-bottom: 1rem;">`;
+                } else if (file.type.startsWith('video/')) {
+                    mediaPreview = `<video controls style="max-width: 100%; border-radius: 10px; margin-bottom: 1rem;">
+                        <source src="${URL.createObjectURL(file)}" type="${file.type}">
+                        Your browser does not support the video tag.
+                    </video>`;
+                }
+            }
+
+            previewContent.innerHTML = `
+                <h3>${postTitle.value || 'Your Post Title'}</h3>
+                ${mediaPreview}
+                <p>${postContent.value || 'Your blog post content will appear here.'}</p>
+            `;
+        }
+
+        // Form Submission
+        document.getElementById('blogForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            alert('Blog post submitted successfully!');
+            // Add backend integration here
+        });
+
+
+
+
+        // JavaScript for Form Submission
+document.getElementById('blogForm').addEventListener('submit', async function (e) {
+  e.preventDefault();
+
+  // Create FormData object
+  const formData = new FormData();
+  formData.append('title', postTitle.value);
+  formData.append('content', postContent.value);
+  if (fileInput.files[0]) {
+    formData.append('media', fileInput.files[0]);
+  }
+
+  try {
+    // Send POST request to backend
+    const response = await fetch('http://localhost:5000/api/posts', {
+      method: 'POST',
+      body: formData,
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      alert(data.message); // Show success message
+      console.log('Post Data:', data.post); // Log the response
+    } else {
+      throw new Error('Failed to submit post');
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    alert('An error occurred while submitting the post.');
+  }
+});
+
+    </script>
+</body>
+</html>
+
